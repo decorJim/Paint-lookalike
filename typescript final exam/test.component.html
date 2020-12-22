@@ -1,0 +1,35 @@
+<main>
+        <form>
+                <label for="sprintNumber"> Numero du sprint
+                        <select name="sprintNumber" [(ngModel)]="sprintNumber">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                        </select> 
+                </label>
+                <label for="teamNumber">Numero de votre equipe
+                        <select name="teamNumber" [(ngModel)]="teamNumber">
+                                <option *ngFor="const team of teams">{{team}}</option>
+                        </select>
+                </label>
+                <label for="complaints"> Vos argumennts
+                        <textarea name="complaints" required rows="10" cols="80"
+                        [(ngModel)]="complaintArguments"></textarea>
+                </label>
+                <button type="form" (click)="sendForm($event)"></button>
+                <small>Votre note pourrait etre reviste a la baisse</small>
+        </form>
+        <p *ngIf="submitted">La demande est soumise!</p>
+        <h1>Liste de toutes les recorrections demandees</h1>
+        <button type="button" (click)="refreshDemands()">Rafraichir les demandes</button>
+        <ul>
+                <li *ngFor="const d of allDemands" [ngClass] = "{'answered': d.answered}" class= "demand">
+                        Sprint : {{d.sprint}}
+                        <br/>
+                        Numero d'equipe: {{d.team}}
+                        <br/>
+                        Arguments: {{d.complaintArguments}}        
+                </li>
+        </ul>
+</main>
